@@ -1,10 +1,11 @@
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::io::{self};
+use std::process::Command;
 
 fn randstring() -> String {
   let rng = rand::thread_rng();
-  let random_bytes: Vec<u8> = rng.sample_iter(Alphanumeric).take(10).collect();
+  let random_bytes: Vec<u8> = rng.sample_iter(Alphanumeric).take(14).collect();
   let random_string: String = random_bytes.into_iter()
       .map(|byte| char::from(byte))
       .collect();
@@ -22,5 +23,7 @@ fn main() {
     for _ in 0..int.unwrap() {
         println!("{}", randstring());
     }
+
+    let _ = Command::new("cmd.exe").arg("/c").arg("pause").status();
 
 }
